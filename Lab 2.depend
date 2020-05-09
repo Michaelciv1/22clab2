@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1588981603 source:c:\users\michael-gpc\documents\code blocks work\lab 2\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"Queue.h"
+
+1588981332 source:c:\users\michael-gpc\documents\code blocks work\lab 2\queue.cpp
+	"Queue.h"
+	<iostream>
+
+1588981253 c:\users\michael-gpc\documents\code blocks work\lab 2\queue.h
+
