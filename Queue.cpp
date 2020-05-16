@@ -1,87 +1,68 @@
-    #include "Queue.h"
-    #include <iostream>
+#include "Queue.h"
+#include <iostream>
 
-    using namespace std;
+using namespace std;
 
-Queue::Queue()
-    {
-        front = nullptr;
-        rear = nullptr;
-        numPeople = 0;
-    }
+Queue::Queue(){
+    front = nullptr;
+    rear = nullptr;
+    numPeople = 0;
+}
 
-Queue::~Queue()
-    {
-        while (!isEmpty())
-        dequeue();
-    }
+Queue::~Queue(){
+    while (!isEmpty())
+    dequeue();
+}
 
+// This function takes no input and returns no value. It prints the current specified queue.
 void Queue::print(){
-        Person *nodePtr;
-        nodePtr = front;
+    Person *nodePtr;
+    nodePtr = front;
 
-        while (nodePtr){
-            cout << nodePtr->age << " ";
-            nodePtr = nodePtr->next;
-        }
-        cout << endl;
+    while (nodePtr){
+        cout << nodePtr->age << " ";
+        nodePtr = nodePtr->next;
     }
+    cout << endl;
+}
 
-void Queue::enqueue(int num)
-    {
+// This function takes an integer as an input and returns no value. It enqueues the input to the specified queue.
+void Queue::enqueue(int num){
+    Person *newNode = nullptr;
 
-       Person *seniorNode = nullptr;
-       Person *adultNode = nullptr;
+    newNode = new Person;
+    newNode->age = num;
+    newNode->next = nullptr;
 
-    if (num >= 60){
-         seniorNode = new Person;
-         seniorNode->age = num;
-         seniorNode->next = nullptr;
+   if (isEmpty()){
+      front = rear = newNode;
+   }
+   else{
+      rear->next = newNode;
+      rear = rear->next;
+   }
+   numPeople++;
+}
 
-         if (isEmpty()){
-            front = rear = seniorNode;
-            }
-         else{
-            rear->next = seniorNode;
-            rear = rear->next;
-        }
-       numPeople++;
+//This function takes no input and returns an int as a value. It dequeues the first person in line in the specified queue.
+int Queue::dequeue(){
+    Person *temp = nullptr;
+    int age = -1;
+
+    if (!isEmpty()){
+        age = front->age;
+        temp = front;
+        front = front->next;
+        delete temp;
     }
-    else{
-       adultNode = new Person;
-       adultNode->age = num;
-       adultNode->next = nullptr;
-       }
+    numPeople--;
+    return age;
+}
 
-       if (isEmpty())
-       {
-          front = rear = adultNode;
-       }
-       else
-       {
-          rear->next = adultNode;
-          rear = rear->next;
-       }
-       numPeople++;
-    }
-
-int Queue::dequeue()
-    {
-       Person *temp = nullptr;
-       int age = -1;
-
-       if (!isEmpty())
-       {
-          age = front->age;
-          temp = front;
-          front = front->next;
-          delete temp;
-       }
-       numPeople--;
-       return age;
-    }
-
-bool Queue::isEmpty()
-    {
-       return (numPeople == 0);
-    }
+/*This function takes no input and returns a bool. It checks if the queue is empty.
+Return value: true means the queue is empty
+              false means the queue is not empty
+*/
+bool Queue::isEmpty(){
+    return (numPeople == 0);
+}
